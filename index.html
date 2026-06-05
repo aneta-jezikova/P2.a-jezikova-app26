@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>🍰 Cukrárna Sweet Dream</title>
+
+<style>
+body {
+    background: pink;
+    text-align: center;
+    font-family: Arial;
+}
+
+.produkt {
+    background: white;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    display: inline-block;
+}
+
+button {
+    padding: 10px;
+    font-size: 18px;
+    background: hotpink;
+    color: white;
+    border: none;
+}
+</style>
+</head>
+
+<body>
+
+<h1>🍩 Cukrárna Sweet Dream 🍰</h1>
+
+<div id="produkty"></div>
+
+<h2>Cena: <span id="cena">0</span> Kč</h2>
+
+<input id="jmeno" placeholder="Jméno"><br>
+<input id="email" placeholder="Email"><br>
+
+<button onclick="alert('Odesláno!')">ODESLAT</button>
+
+<script>
+let produkty = [
+{name:"Dort",price:120},
+{name:"Donut",price:40},
+{name:"Kobliha",price:30},
+{name:"Croissant",price:50}
+];
+
+produkty.forEach((p,i)=>{
+document.getElementById("produkty").innerHTML+=`
+<div class="produkt">
+<b>${p.name}</b><br>
+${p.price} Kč<br>
+<input id="p${i}" type="number" value="0">
+</div>`;
+});
+
+setInterval(()=>{
+let cena=0;
+produkty.forEach((p,i)=>{
+let v=Number(document.getElementById("p"+i).value);
+cena+=v*p.price;
+});
+document.getElementById("cena").innerText=cena;
+},500);
+</script>
+
+</body>
+</html>
