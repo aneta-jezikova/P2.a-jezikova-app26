@@ -1,13 +1,52 @@
 <!DOCTYPE html>
-<html>
+<html lang="cs">
 <head>
 <meta charset="UTF-8">
-<title>Moje firma</title>
+<title>Sweet Dream Cukrárna</title>
+
+<style>
+body {
+    font-family: Arial;
+    background: #ffe6f0;
+    text-align: center;
+}
+
+h1 {
+    color: #e60073;
+}
+
+.produkt {
+    background: white;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 15px;
+    display: inline-block;
+    width: 200px;
+    box-shadow: 0 0 10px pink;
+}
+
+button {
+    background: #ff66b2;
+    color: white;
+    border: none;
+    padding: 15px;
+    margin-top: 20px;
+    font-size: 18px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+input {
+    padding: 5px;
+    margin: 5px;
+}
+</style>
+
 </head>
 
 <body>
 
-<h1>Moje Firma</h1>
+<h1>🍰 Sweet Dream Cukrárna 🍩</h1>
 
 <div id="produkty"></div>
 
@@ -15,7 +54,7 @@
 <h2>Počet kusů: <span id="kusy">0</span></h2>
 
 <h3>Vaše údaje</h3>
-<input type="text" id="jmeno" placeholder="Jméno"><br>
+<input type="text" id="jmeno" placeholder="Jméno a příjmení"><br>
 <input type="email" id="email" placeholder="Email"><br>
 <input type="tel" id="telefon" placeholder="Telefon"><br>
 
@@ -34,9 +73,12 @@ fetch('produkty.csv')
 
         produkty.push({nazev, cena: Number(cena)});
 
-        document.getElementById("produkty").innerHTML += 
-        `${nazev} ${cena} Kč
-         <input type="number" id="p${i}" value="0" min="0"><br>`;
+        document.getElementById("produkty").innerHTML += `
+        <div class="produkt">
+        <b>${nazev}</b><br>
+        ${cena} Kč<br>
+        <input type="number" id="p${i}" value="0" min="0">
+        </div>`;
     });
 });
 
@@ -70,11 +112,13 @@ function odeslat() {
         }
     });
 
-    text += "\nJméno: " + jmeno;
+    text += "\nCena: " + document.getElementById("cena").innerText + " Kč";
+    text += "\nKusů: " + document.getElementById("kusy").innerText;
+    text += "\n\nJméno: " + jmeno;
     text += "\nEmail: " + email;
     text += "\nTelefon: " + tel;
 
-    window.location.href = 
+    window.location.href =
     `mailto:app@kostka-skola.cz?subject=Objednavka&body=${encodeURIComponent(text)}`;
 }
 </script>
